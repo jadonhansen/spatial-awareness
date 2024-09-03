@@ -1,4 +1,4 @@
-import { ApiResponse, Category, Place, SortBy, SortDirection } from "../types/types";
+import { ApiResponse, Category, Place, PlaceRecords, SortBy, SortDirection } from "../types/types";
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 const isDebug = import.meta.env.DEV;
@@ -29,7 +29,7 @@ export async function searchForPlace(
 	filter?: Category,
 	sortBy?: SortBy,
 	sortDirection?: SortDirection,
-): Promise<ApiResponse<string[], Error>> {
+): Promise<ApiResponse<PlaceRecords, Error>> {
 	const finalUrl = `${baseUrl}/places/search=${name}&page=${page}&limit=${limit}&filter[category]=${filter}&sortBy=${sortBy}&sortDirection=${sortDirection}`;
 	const res = await fetch(finalUrl, fetchOptions);
 
