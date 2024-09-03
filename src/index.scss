@@ -1,0 +1,49 @@
+:root {
+	/* COLORS */
+	--bg-color-dark: #000000;
+	--bg-color-light: #ffffff;
+	--text-color-dark: rgba(255, 255, 255, 0.87);
+	--text-color-light: #213547;
+	--footer-bg-color-dark: #000000;
+	--footer-bg-color-light: #ffffff;
+	--divider-line-color-dark: #343434;
+	--divider-line-color-light: #cecece;
+
+	/* SIZES */
+	--navbar-footer-padding: 1.5rem;
+	--navbar-height: 70px;
+
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	color-scheme: light dark;
+	color: var(--text-color-dark);
+	background-color: var(--bg-color-dark);
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	body {
+		margin: 0;
+		padding: 0;
+		min-height: 100vh;
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		p {
+			margin: 0;
+			padding: 0;
+		}
+	}
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		color: var(--text-color-light);
+		background-color: var(--bg-color-light);
+	}
+}
