@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { pingServer } from "../api/api";
 import Map from "../components/Map";
 import "../styles/basePage.scss";
 
+// TODO implement search UI, API call and state here
 export default function MapPlaces() {
-	// TODO implement search UI, API call and state here
+	const [testError, setTestError] = useState(false);
+
+	useEffect(() => {
+		testServer();
+	}, []);
+
+	const testServer = async () => {
+		const { error } = await pingServer();
+		if (error) setTestError(true);
+	};
 
 	return (
 		<div className="page">
@@ -11,6 +22,7 @@ export default function MapPlaces() {
 
 			<Map>
 				<div>Search UI here</div>
+				<div>{testError && "Server is offline at the moment."}</div>
 			</Map>
 		</div>
 	);
