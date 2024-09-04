@@ -44,7 +44,7 @@ export default function TablePlaces() {
 		<div className="page">
 			<h1>TablePlaces</h1>
 
-			<Table />
+			{/* <Table /> */}
 		</div>
 	);
 }

@@ -54,4 +54,25 @@ export type SortDirection = "desc" | "asc";
 export type SortBy = "name" | "category" | "description" | "address";
 
 // TABLE
-// todo
+export interface TableColumn {
+	label: string;
+	field: string;
+	sortDirection?: SortDirection;
+}
+
+export interface TableRow {
+	cells: TableRowCell[];
+}
+
+export interface TableRowCell {
+	text: string | number;
+	field: string;
+}
+
+export interface Pagination {
+	paginate(pageNumber: number, limit: number): Promise<void>;
+	limit: number;
+	page: number;
+	totalPages: number;
+	totalItems: number;
+}
