@@ -70,7 +70,6 @@ export interface TableRowCell {
 }
 
 export interface Pagination {
-	paginate(pageNumber: number, limit: number): Promise<void>;
 	limit: number;
 	page: number;
 	totalPages: number;

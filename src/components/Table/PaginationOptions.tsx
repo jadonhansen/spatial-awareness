@@ -2,6 +2,7 @@ import React from "react";
 
 interface Props {
 	rowCount: number;
+	limit: number;
 	totalCount: number;
 	currentPage: number;
 	totalPages: number;
@@ -11,18 +12,19 @@ interface Props {
 // TODO remove below
 /* eslint @typescript-eslint/no-unused-vars: 0 */
 
-export default function PaginationOptions({ rowCount, totalCount, currentPage, totalPages, paginate }: Props) {
-	const showRowsSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-		// Number(event.target.value);
-		// paginate();
+export default function PaginationOptions({ rowCount, limit, totalCount, currentPage, totalPages, paginate }: Props) {
+	const limitChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+		paginate(1, Number(event.target.value));
 	};
 
 	const goToPreviousPage = (currentPage: number) => {
-		// paginate();
+		// TODO calculate if possible
+		paginate(currentPage - 1, limit);
 	};
 
 	const goToNextPage = (currentPage: number) => {
-		// paginate();
+		// TODO calculate if possible
+		paginate(currentPage + 1, limit);
 	};
 
 	return (
@@ -30,7 +32,7 @@ export default function PaginationOptions({ rowCount, totalCount, currentPage, t
 			<ul className="pagination">
 				<li className="rows-per-page">
 					<label htmlFor="rowsPerPage">Rows per page</label>
-					<select value={rowCount} onChange={showRowsSelectChange} className="rows-select">
+					<select value={limit} onChange={limitChange} className="rows-select">
 						<option>5</option>
 						<option>10</option>
 						<option>20</option>

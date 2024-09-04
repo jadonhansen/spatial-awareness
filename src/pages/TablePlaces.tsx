@@ -1,50 +1,129 @@
 import React, { useEffect, useState } from "react";
 import Table from "../components/Table";
-import { searchForPlace } from "../api/api";
-import { Category, Place } from "../types/types";
+import { getInitialList, paginateTableData, searchForPlace } from "../api/api";
+import { Pagination, PlaceRecords, SortBy, SortDirection, TableRow } from "../types/types";
 import "../styles/basePage.scss";
 
-// TODO remove below
-/* eslint @typescript-eslint/no-unused-vars: 0 */
+const tableColumns = [
+	{
+		label: "Name",
+		field: "name",
+		sortDirection: undefined,
+	},
+	{ label: "Category", field: "category", sortDirection: undefined },
+	{
+		label: "Description",
+		field: "description",
+		sortDirection: undefined,
+	},
+	{
+		label: "Address",
+		field: "address",
+		sortDirection: undefined,
+	},
+];
 
 export default function TablePlaces() {
 	// component state
-	const [searchError, setSearchError] = useState<string | undefined>();
-	const [loading, setLoading] = useState(false);
-	const [places, setPlaces] = useState<Place[] | undefined>();
+	const [error, setError] = useState<string | undefined>();
+	const [loading, setLoading] = useState(true);
 	// form state
 	const [searchStr, setSearchStr] = useState<string | undefined>();
-	const [category, setCategory] = useState<Category | undefined>();
+	// table state
+	const defaultLimit = 10;
+	const [tableRows, setTableRows] = useState<TableRow[]>([]);
+	const [paginationData, setPaginationData] = useState<Pagination>({
+		limit: defaultLimit,
+		page: 1,
+		totalItems: 0,
+		totalPages: 1,
+	});
 
 	useEffect(() => {
 		initialData();
 	}, []);
 
 	const initialData = async () => {
-		// todo get initial set of data for the table
-	};
+		const { data, error } = await getInitialList(defaultLimit);
 
-	const searchBtnClick = () => {
-		if (loading || !searchStr || searchStr?.trim().length <= 0 || !category) return;
-
-		setLoading(true);
-		search(searchStr, category);
-	};
-
-	const search = async (searchString: string, selectedCategory: Category) => {
-		const { data, error } = await searchForPlace(searchString, 1, 1000, selectedCategory);
-
-		if (error) setSearchError("An error occurred, please try again.");
-		else if (data.data.length > 0) setPlaces(data.data);
-		else setSearchError("No places found!");
+		if (error) setError(`An error occurred, "${JSON.stringify(error)}", please try again.`);
+		else mapTableData(data);
 
 		setLoading(false);
 	};
+
+	const mapTableData = (data: PlaceRecords) => {
+		setPaginationData({
+			limit: data.meta.limit,
+			page: data.meta.page,
+			totalPages: data.meta.totalPages,
+			totalItems: data.meta.totalItems,
+		});
+
+		let rows: TableRow[] = [];
+
+		rows = data.data.map((place): TableRow => {
+			return {
+				cells: [
+					{
+						text: place.name,
+						field: place.name,
+					},
+					{
+						text: place.category,
+						field: place.category,
+					},
+					{
+						text: place.description,
+						field: place.description,
+					},
+					{
+						text: place.address,
+						field: place.address,
+					},
+				],
+			};
+		});
+
+		setTableRows(rows);
+	};
+
+	const paginateTable = async (pageNumber: number, limit: number, columnSort: SortBy | undefined, sortDirection: SortDirection) => {
+		if (loading) return;
+
+		setLoading(true);
+
+		const { data, error } = await paginateTableData(pageNumber, limit, columnSort, sortDirection);
+
+		if (error) setError(`An error occurred, "${JSON.stringify(error)}", please try again.`);
+		else mapTableData(data);
+
+		setLoading(false);
+	};
+
+	const searchBtnClick = async () => {
+		if (loading || !searchStr || searchStr?.trim().length <= 0) return;
+
+		setLoading(true);
+
+		const { data, error } = await searchForPlace(searchStr, 1, defaultLimit);
+
+		if (error) setError(`An error occurred, "${JSON.stringify(error)}", please try again.`);
+		else mapTableData(data);
+
+		setLoading(false);
+	};
+
 	return (
 		<div className="page">
-			<h1>TablePlaces</h1>
+			<input type="text" onChange={(e) => setSearchStr(e.target.value.trim())} />
+			<button onClick={searchBtnClick}>Search</button>
 
-			{/* <Table /> */}
+			{loading && <p>Loading places...</p>}
+			{error && <p>{error}</p>}
+			{!loading && !error && (
+				<Table columns={tableColumns} rows={tableRows} pagination={paginationData} paginate={paginateTable} />
+			)}
 		</div>
 	);
 }
