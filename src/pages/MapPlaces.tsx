@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { pingServer, searchForPlace } from "../api/api";
+import { Category, Place } from "../types/types";
 import Map from "../components/Map";
 import "../styles/basePage.scss";
-import { Category, Place } from "../types/types";
+import "../styles/mapPlaces.scss";
 
 // TODO remove below
 /* eslint @typescript-eslint/no-unused-vars: 0 */
@@ -10,10 +11,10 @@ import { Category, Place } from "../types/types";
 export default function MapPlaces() {
 	// component state
 	const [testError, setTestError] = useState(false);
-	const [searchError, setSearchError] = useState<string | undefined>();
+	const [error, setError] = useState<string | undefined>();
 	const [loading, setLoading] = useState(false);
 	const [mapReady, setMapReady] = useState(false);
-	const [places, setPlaces] = useState<Place[] | undefined>();
+	const [markers, setMarkers] = useState<Place[] | undefined>();
 	// form state
 	const [searchStr, setSearchStr] = useState<string | undefined>();
 	const [category, setCategory] = useState<Category | undefined>();
@@ -37,19 +38,33 @@ export default function MapPlaces() {
 	const search = async (searchString: string, selectedCategory: Category) => {
 		const { data, error } = await searchForPlace(searchString, 1, 1000, selectedCategory);
 
-		if (error) setSearchError("An error occurred, please try again.");
-		else if (data.data.length > 0) setPlaces(data.data);
-		else setSearchError("No places found!");
+		if (error) setError("An error occurred, please try again.");
+		else if (data.data.length > 0) mapPlacesToMarkers(data.data);
+		else setError("No places found!");
 
 		setLoading(false);
 	};
 
+	const mapPlacesToMarkers = (places: Place[]) => {
+		// todo create marker interface
+		setMarkers(places);
+	};
+
 	return (
-		<div className="page">
-			<h1>MapPlaces</h1>
+		<div id="map-places-page" className="page">
+			<h1>Find a Place</h1>
+
+			<div className="search-section">
+				<input type="text" placeholder="Name" onChange={(e) => setSearchStr(e.target.value.trim())} />
+				<button onClick={searchBtnClick} disabled={testError || loading || !searchStr || searchStr?.trim().length <= 0}>
+					Search
+				</button>
+			</div>
+
+			{loading && <p className="loading">Loading places...</p>}
+			{error && <p className="error-message">{error}</p>}
 
 			<Map>
-				<div>Search UI here</div>
 				<div>{testError && "Server is offline at the moment."}</div>
 			</Map>
 		</div>

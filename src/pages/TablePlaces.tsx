@@ -3,6 +3,8 @@ import Table from "../components/Table";
 import { getInitialList, paginateTableData, searchForPlace } from "../api/api";
 import { Pagination, PlaceRecords, SortBy, SortDirection, TableRow } from "../types/types";
 import "../styles/basePage.scss";
+import "../styles/tablePlaces.scss";
+// import { mockTable } from "./mockData";
 
 const tableColumns = [
 	{
@@ -48,6 +50,8 @@ export default function TablePlaces() {
 
 		if (error) setError(`An error occurred, "${JSON.stringify(error)}", please try again.`);
 		else mapTableData(data);
+
+		// mapTableData(mockTable);
 
 		setLoading(false);
 	};
@@ -102,6 +106,7 @@ export default function TablePlaces() {
 	};
 
 	const searchBtnClick = async () => {
+		setError(undefined);
 		if (loading || !searchStr || searchStr?.trim().length <= 0) return;
 
 		setLoading(true);
@@ -115,15 +120,20 @@ export default function TablePlaces() {
 	};
 
 	return (
-		<div className="page">
-			<input type="text" onChange={(e) => setSearchStr(e.target.value.trim())} />
-			<button onClick={searchBtnClick}>Search</button>
+		<div id="table-places-page" className="page">
+			<h1>Available Places</h1>
 
-			{loading && <p>Loading places...</p>}
-			{error && <p>{error}</p>}
-			{!loading && !error && (
-				<Table columns={tableColumns} rows={tableRows} pagination={paginationData} paginate={paginateTable} />
-			)}
+			<div className="search-section">
+				<input type="text" placeholder="Name" onChange={(e) => setSearchStr(e.target.value.trim())} />
+				<button onClick={searchBtnClick} disabled={loading || !searchStr || searchStr?.trim().length <= 0}>
+					Search
+				</button>
+			</div>
+
+			{loading && <p className="loading">Loading places...</p>}
+			{error && <p className="error-message">{error}</p>}
+
+			<Table columns={tableColumns} rows={tableRows} pagination={paginationData} paginate={paginateTable} />
 		</div>
 	);
 }

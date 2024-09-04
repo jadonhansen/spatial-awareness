@@ -1,0 +1,41 @@
+#map-places-page {
+	display: flex;
+	flex-direction: column;
+
+	h1 {
+		margin-bottom: 2rem;
+	}
+
+	.search-section {
+		margin-bottom: 2rem;
+
+		input {
+			height: 25px;
+			width: 200px;
+			border-radius: 5px;
+			border: 1px solid var(--divider-line-color);
+			margin-right: 0.5rem;
+			background: transparent;
+			padding: 5px 10px;
+		}
+
+		button {
+			height: 35px;
+			width: 70px;
+			border-radius: 5px;
+			border: none;
+			background-color: var(--primary-color);
+			color: var(--btn-text-color);
+		}
+	}
+
+	.loading,
+	.error-message {
+		text-align: center;
+		margin-bottom: 2rem;
+	}
+
+	.error-message {
+		color: var(--error-text);
+	}
+}

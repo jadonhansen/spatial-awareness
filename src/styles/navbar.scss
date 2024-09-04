@@ -1,25 +1,47 @@
-.navbar {
+#navbar {
 	position: sticky;
 	top: 0;
 	width: 100%;
 	z-index: 100;
-	background-color: var(--bg-color-dark);
+	background-color: var(--navbar-color);
 	max-height: var(--navbar-height);
 
 	nav {
 		padding: var(--navbar-footer-padding);
 		display: flex;
 		flex-direction: row;
+		justify-content: end;
 		align-items: center;
 
-		.mr {
-			margin-right: 1rem;
-		}
-	}
-}
+		a {
+			display: flex;
+			align-items: center;
+			text-decoration: none;
+			font-weight: 500;
+			color: var(--navbar-text-color);
 
-@media (prefers-color-scheme: light) {
-	:root {
-		background-color: var(--bg-color-light);
+			img {
+				height: 16px;
+				margin-right: 0.4rem;
+			}
+
+			@media (prefers-color-scheme: light) {
+				.table-icon {
+					content: url("../assets/table-light.svg");
+				}
+
+				.map-icon {
+					content: url("../assets/map-light.svg");
+				}
+			}
+		}
+
+		a:hover {
+			color: var(--navbar-text-hover-color);
+		}
+
+		.mr {
+			margin-right: 1.5rem;
+		}
 	}
 }
