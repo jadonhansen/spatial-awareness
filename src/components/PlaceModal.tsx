@@ -22,16 +22,18 @@ export default function PlaceModal({ place, closeModal }: Props) {
 				</div>
 				<div className="section">
 					<div className="info-section">
-						<div className="col">
-							<p>Description</p>
+						<div className="col-left">
+							<p className="sub-heading">About this place</p>
 							<p>{place.description}</p>
 						</div>
-						<div className="col">
-							<p>Address</p>
+						<div className="col-right">
+							<p className="sub-heading">Address</p>
 							<p>{place.address}</p>
 						</div>
 					</div>
-					<div className="map-section">{/* todo: map section */}</div>
+					<div className="map-section">
+						<p>Map</p>
+					</div>
 				</div>
 			</div>
 		</div>

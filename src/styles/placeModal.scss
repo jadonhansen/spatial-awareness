@@ -1,25 +1,72 @@
 #place-modal {
-	// fill background with overlay
+	position: absolute;
+	inset: 0;
+	height: 100vh;
+	width: 100vw;
+	z-index: 200;
+	background-color: rgba(0, 0, 0, 0.56);
+	align-content: center;
 
 	.modal-content {
-		// center visible modal box
+		z-index: 500;
+		width: 50%;
+		height: 60%;
+		margin: auto;
+		background-color: var(--navbar-color);
+		border-radius: 10px;
+		padding: 2rem;
 
 		.header {
 			display: flex;
 			justify-content: space-between;
+			margin-bottom: 2rem;
+
+			p {
+				color: var(--secondary-text-color);
+			}
+
+			button {
+				height: 30px;
+				width: 30px;
+				padding: 5px;
+				background-color: transparent;
+				border-radius: 50px;
+				border: 1px solid var(--secondary-text-color);
+				color: var(--secondary-text-color);
+			}
+
+			button:hover {
+				cursor: pointer;
+				border: 1px solid var(--text-color);
+				color: var(--text-color);
+			}
 		}
 
 		.section {
 			.info-section {
 				display: flex;
-
-				.col {
+				margin-bottom: 2rem;
+				.col-left,
+				.col-right {
 					width: 50%;
+
+					.sub-heading {
+						color: var(--secondary-text-color);
+						font-weight: 500;
+						margin-bottom: 0.5rem;
+					}
+				}
+
+				.col-left {
+					padding-right: 0.5rem;
+				}
+				.col-right {
+					padding-left: 0.5rem;
 				}
 			}
 
 			.map-section {
-				height: 100%;
+				background-color: pink;
 			}
 		}
 	}

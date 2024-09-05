@@ -3,7 +3,6 @@ import Table from "../components/Table";
 import { getInitialList, paginateTableData, searchForPlace } from "../api/api";
 import { Pagination, Place, PlaceRecords, SortBy, SortDirection, TableRow } from "../types/types";
 import PlaceModal from "../components/PlaceModal";
-import "../styles/basePage.scss";
 import "../styles/tablePlaces.scss";
 // import { mockTable } from "./mockData";
 
@@ -30,7 +29,19 @@ export default function TablePlaces() {
 	// component state
 	const [error, setError] = useState<string | undefined>();
 	const [loading, setLoading] = useState(true);
-	const [placeModalData, setPlaceModalData] = useState<Place | undefined>();
+	const [placeModalData, setPlaceModalData] = useState<Place | undefined>({
+		id: "1",
+		name: "McDonalds",
+		description:
+			"Lorem ispsdlfjs fj sakdfj adjfsadjnfasdjf asdkjfnsDJNFSD FKSD JFKSD JFDF Kdkf sdfksjd fskdjsfks kwfj f kfwkefj kf ksjf skdj fksdf",
+		address: "Your om, sgreet, apetonw, 923942. South afrca",
+		companyId: "q34",
+		category: "health",
+		coordinates: {
+			lat: 32423.343,
+			lon: 34.03492,
+		},
+	});
 	// form state
 	const [searchStr, setSearchStr] = useState<string | undefined>();
 	// table state

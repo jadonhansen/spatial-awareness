@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { pingServer, searchForPlace } from "../api/api";
 import { Category, Place } from "../types/types";
 import Map from "../components/Map";
-import "../styles/basePage.scss";
 import "../styles/mapPlaces.scss";
 
 // TODO remove below
