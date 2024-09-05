@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Table from "../components/Table";
 import { getInitialList, paginateTableData, searchForPlace } from "../api/api";
-import { Pagination, PlaceRecords, SortBy, SortDirection, TableRow } from "../types/types";
+import { Pagination, Place, PlaceRecords, SortBy, SortDirection, TableRow } from "../types/types";
+import PlaceModal from "../components/PlaceModal";
 import "../styles/basePage.scss";
 import "../styles/tablePlaces.scss";
 // import { mockTable } from "./mockData";
@@ -29,6 +30,7 @@ export default function TablePlaces() {
 	// component state
 	const [error, setError] = useState<string | undefined>();
 	const [loading, setLoading] = useState(true);
+	const [placeModalData, setPlaceModalData] = useState<Place | undefined>();
 	// form state
 	const [searchStr, setSearchStr] = useState<string | undefined>();
 	// table state
@@ -121,6 +123,8 @@ export default function TablePlaces() {
 
 	return (
 		<div id="table-places-page" className="page">
+			{placeModalData && <PlaceModal place={placeModalData} closeModal={() => setPlaceModalData(undefined)} />}
+
 			<h1>Available Places</h1>
 
 			<div className="search-section">
