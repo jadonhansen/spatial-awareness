@@ -13,6 +13,7 @@ export default function MapPlaces() {
 	// form state
 	const [searchStr, setSearchStr] = useState<string | undefined>();
 	const [category, setCategory] = useState<Category | undefined>();
+	const NO_CATEOGORY = "No category";
 
 	useEffect(() => {
 		testServer();
@@ -24,25 +25,28 @@ export default function MapPlaces() {
 	};
 
 	const searchBtnClick = () => {
-		if (loading || !searchStr || searchStr?.trim().length <= 0 || !category) return;
+		setError(undefined);
+		if (loading || (searchStr && searchStr?.trim().length <= 0)) return;
 
 		setLoading(true);
 		search(searchStr, category);
 	};
 
-	const search = async (searchString: string, selectedCategory: Category) => {
-		const { data, error } = await searchForPlace(searchString, 1, 1000, selectedCategory);
-
-		if (error) setError("An error occurred, please try again.");
-		else if (data.data.length > 0) setPlaces(data.data);
-		else setError("No places found!");
-
-		setLoading(false);
+	/* eslint @typescript-eslint/no-unused-vars: 0 */
+	const search = async (searchString: string | undefined, selectedCategory: Category | undefined) => {
+		// TODO: make search string optional in in API call
+		// const { data, error } = await searchForPlace(searchString, 1, 1000, selectedCategory);
+		// if (error) setError("An error occurred, please try again.");
+		// else if (data.data.length > 0) setPlaces(data.data);
+		// else setError("No places found!");
+		// setLoading(false);
 	};
 
 	const updateCategory = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		const value = event.target.value;
-		if (allCategories.includes(value as Category)) setCategory(value as Category);
+
+		if (value === NO_CATEOGORY) setCategory(undefined);
+		else if (allCategories.includes(value as Category)) setCategory(value as Category);
 	};
 
 	return (
@@ -54,6 +58,7 @@ export default function MapPlaces() {
 					<div className="search-section">
 						<input type="text" placeholder="Name" onChange={(e) => setSearchStr(e.target.value.trim())} />
 						<select value={category} onChange={updateCategory} className="rows-select">
+							<option>{NO_CATEOGORY}</option>
 							{allCategories.map((category: Category, index: number) => {
 								return <option key={index}>{category}</option>;
 							})}

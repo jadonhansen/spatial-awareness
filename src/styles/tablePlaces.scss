@@ -29,6 +29,10 @@
 			color: var(--btn-text-color);
 		}
 
+		button:hover {
+			cursor: pointer;
+		}
+
 		.loading,
 		.error-message {
 			display: inline-block;

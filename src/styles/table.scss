@@ -23,21 +23,28 @@
 	}
 
 	tfoot {
-		nav {
-			width: max-content;
+		td {
+			padding: 0.5rem;
+			padding-top: 2rem;
 
-			.pagination {
-				display: flex;
+			nav {
+				width: max-content;
+				float: right;
 
-				.current {
-					margin: 0 0.5rem;
-				}
+				.pagination {
+					display: flex;
 
-				select {
-					margin: 0 1rem 0 0.5rem;
-				}
-				span:hover {
-					cursor: pointer;
+					.current {
+						margin: 0 0.5rem;
+					}
+
+					select {
+						margin: 0 1rem 0 0.5rem;
+					}
+
+					span:hover {
+						cursor: pointer;
+					}
 				}
 			}
 		}

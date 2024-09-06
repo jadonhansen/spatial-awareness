@@ -93,6 +93,7 @@ export default function TablePlaces() {
 	const paginateTable = async (pageNumber: number, limit: number, columnSort: SortBy | undefined, sortDirection: SortDirection) => {
 		if (loading) return;
 
+		setError(undefined);
 		setLoading(true);
 
 		const { data, error } = await paginateTableData(pageNumber, limit, columnSort, sortDirection);

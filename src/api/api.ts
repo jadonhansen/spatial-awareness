@@ -36,7 +36,11 @@ export async function searchForPlace(
 	sortBy?: SortBy,
 	sortDirection?: SortDirection,
 ): Promise<ApiResponse<PlaceRecords, Error>> {
-	const finalUrl = `${baseUrl}/places?search=${name}&page=${page}&limit=${limit}&category=${filter}&sortBy=${sortBy}&sortDirection=${sortDirection}`;
+	let finalUrl = `${baseUrl}/places?search=${name}&page=${page}&limit=${limit}`;
+
+	if (filter) finalUrl += `&category=${filter}`;
+	if (sortBy || sortDirection) finalUrl += `&sortBy=${sortBy}&sortDirection=${sortDirection}`;
+
 	const res = await fetch(finalUrl, fetchOptions);
 
 	if (res.ok) {
