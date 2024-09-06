@@ -29,7 +29,7 @@ export default function Table({ pagination, columns, rows, paginate }: Props) {
 	};
 
 	return (
-		<table>
+		<table id="data-table">
 			<thead>
 				<DatatableColumns columns={columns} sortColumn={sortColumn} />
 			</thead>

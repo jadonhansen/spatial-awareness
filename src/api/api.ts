@@ -5,7 +5,7 @@ const isDebug = import.meta.env.DEV;
 
 const fetchOptions: RequestInit = {
 	method: "GET",
-	mode: "no-cors",
+	mode: "cors",
 	headers: {
 		"Content-Type": "application/json",
 	},
@@ -35,7 +35,7 @@ export async function searchForPlace(
 	sortBy?: SortBy,
 	sortDirection?: SortDirection,
 ): Promise<ApiResponse<PlaceRecords, Error>> {
-	const finalUrl = `${baseUrl}/places/search=${name}&page=${page}&limit=${limit}&filter[category]=${filter}&sortBy=${sortBy}&sortDirection=${sortDirection}`;
+	const finalUrl = `${baseUrl}/places/search=${name}&page=${page}&limit=${limit}&category=${filter}&sortBy=${sortBy}&sortDirection=${sortDirection}`;
 	const res = await fetch(finalUrl, fetchOptions);
 
 	if (res.ok) {

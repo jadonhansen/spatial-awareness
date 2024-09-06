@@ -29,19 +29,7 @@ export default function TablePlaces() {
 	// component state
 	const [error, setError] = useState<string | undefined>();
 	const [loading, setLoading] = useState(true);
-	const [placeModalData, setPlaceModalData] = useState<Place | undefined>({
-		id: "1",
-		name: "McDonalds",
-		description:
-			"Lorem ispsdlfjs fj sakdfj adjfsadjnfasdjf asdkjfnsDJNFSD FKSD JFKSD JFDF Kdkf sdfksjd fskdjsfks kwfj f kfwkefj kf ksjf skdj fksdf",
-		address: "Your om, sgreet, apetonw, 923942. South afrca",
-		companyId: "q34",
-		category: "health",
-		coordinates: {
-			lat: 32423.343,
-			lon: 34.03492,
-		},
-	});
+	const [placeModalData, setPlaceModalData] = useState<Place | undefined>();
 	// form state
 	const [searchStr, setSearchStr] = useState<string | undefined>();
 	// table state

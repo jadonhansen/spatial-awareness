@@ -18,13 +18,11 @@ export default function PaginationOptions({ rowCount, limit, totalCount, current
 	};
 
 	const goToPreviousPage = (currentPage: number) => {
-		// TODO calculate if possible
-		paginate(currentPage - 1, limit);
+		if (currentPage - 1 > 0) paginate(currentPage - 1, limit);
 	};
 
 	const goToNextPage = (currentPage: number) => {
-		// TODO calculate if possible
-		paginate(currentPage + 1, limit);
+		if (currentPage + 1 <= totalPages) paginate(currentPage + 1, limit);
 	};
 
 	return (
@@ -41,7 +39,7 @@ export default function PaginationOptions({ rowCount, limit, totalCount, current
 					</select>
 				</li>
 
-				<li className="previous">
+				<li className={currentPage - 1 > 0 ? "active previous" : "disabled previous"}>
 					<a onClick={() => goToPreviousPage(currentPage)}>
 						<span aria-label="Previous" className="fa fa-angle-left"></span>
 					</a>
@@ -49,7 +47,7 @@ export default function PaginationOptions({ rowCount, limit, totalCount, current
 				<p className="current">
 					Page {currentPage} of {totalPages}
 				</p>
-				<li className="next">
+				<li className={currentPage + 1 <= totalPages ? "active next" : "disabled next"}>
 					<a onClick={() => goToNextPage(currentPage)}>
 						<span aria-label="Next" className="fa fa-angle-right"></span>
 					</a>
