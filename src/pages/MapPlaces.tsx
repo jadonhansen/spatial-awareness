@@ -3,6 +3,7 @@ import { pingServer, searchForPlace } from "../api/api";
 import { allCategories, Category, Place } from "../types/types";
 import Map from "../components/Map";
 import "../styles/mapPlaces.scss";
+import { prettyCategory } from "../helpers/helpers";
 
 export default function MapPlaces() {
 	// component state
@@ -13,7 +14,7 @@ export default function MapPlaces() {
 	// form state
 	const [searchStr, setSearchStr] = useState<string | undefined>();
 	const [category, setCategory] = useState<Category | undefined>();
-	const NO_CATEOGORY = "No category";
+	const NO_CATEOGORY = "Choose category";
 
 	useEffect(() => {
 		testServer();
@@ -26,20 +27,23 @@ export default function MapPlaces() {
 
 	const searchBtnClick = () => {
 		setError(undefined);
-		if (loading || (searchStr && searchStr?.trim().length <= 0)) return;
+		if (testError || loading || (searchStr && searchStr?.trim().length <= 0) || (!searchStr && !category)) return;
+
+		console.log(searchStr);
+		console.log(category);
 
 		setLoading(true);
 		search(searchStr, category);
 	};
 
-	/* eslint @typescript-eslint/no-unused-vars: 0 */
 	const search = async (searchString: string | undefined, selectedCategory: Category | undefined) => {
-		// TODO: make search string optional in in API call
-		// const { data, error } = await searchForPlace(searchString, 1, 1000, selectedCategory);
-		// if (error) setError("An error occurred, please try again.");
-		// else if (data.data.length > 0) setPlaces(data.data);
-		// else setError("No places found!");
-		// setLoading(false);
+		const { data, error } = await searchForPlace(searchString, 1, 1000, selectedCategory);
+
+		if (error) setError("An error occurred, please try again.");
+		else if (data.data.length > 0) setPlaces(data.data);
+		else setError("No places found!");
+
+		setLoading(false);
 	};
 
 	const updateCategory = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -56,17 +60,18 @@ export default function MapPlaces() {
 					<h1>Find a Place</h1>
 
 					<div className="search-section">
-						<input type="text" placeholder="Name" onChange={(e) => setSearchStr(e.target.value.trim())} />
+						<input type="text" placeholder="Name" value={searchStr} onChange={(e) => setSearchStr(e.target.value)} />
 						<select value={category} onChange={updateCategory} className="rows-select">
 							<option>{NO_CATEOGORY}</option>
 							{allCategories.map((category: Category, index: number) => {
-								return <option key={index}>{category}</option>;
+								return (
+									<option key={index} value={category}>
+										{prettyCategory(category)}
+									</option>
+								);
 							})}
 						</select>
-						<button
-							onClick={searchBtnClick}
-							disabled={testError || loading || !searchStr || searchStr?.trim().length <= 0}
-						>
+						<button onClick={searchBtnClick} disabled={testError || loading}>
 							Search
 						</button>
 					</div>

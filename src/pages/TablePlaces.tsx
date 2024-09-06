@@ -3,6 +3,7 @@ import Table from "../components/Table";
 import { getInitialList, paginateTableData, searchForPlace } from "../api/api";
 import { Pagination, Place, PlaceRecords, SortBy, SortDirection, TableRow } from "../types/types";
 import PlaceModal from "../components/PlaceModal";
+import { prettyCategory } from "../helpers/helpers";
 import "../styles/tablePlaces.scss";
 
 const tableColumns = [
@@ -72,7 +73,7 @@ export default function TablePlaces() {
 						field: place.name,
 					},
 					{
-						text: place.category,
+						text: prettyCategory(place.category),
 						field: place.category,
 					},
 					{

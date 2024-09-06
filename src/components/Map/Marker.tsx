@@ -1,5 +1,5 @@
 import React from "react";
-import { Place } from "../../types/types";
+import { CategoryEmoji, Place } from "../../types/types";
 
 interface Props {
 	lat: number;
@@ -7,10 +7,6 @@ interface Props {
 	place: Place;
 }
 
-export default function Marker({ lat, lng, place }: Props) {
-	return (
-		<div>
-			{lat} {lng} {JSON.stringify(place)}
-		</div>
-	);
+export default function Marker({ place }: Props) {
+	return <div className="map-marker">{CategoryEmoji.get(place.category)}</div>;
 }

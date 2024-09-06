@@ -29,7 +29,7 @@ export async function getPlaceById(id: string): Promise<ApiResponse<Place, Error
 }
 
 export async function searchForPlace(
-	name: string,
+	name: string | undefined,
 	page: number,
 	limit: number,
 	filter?: Category,

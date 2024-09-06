@@ -49,11 +49,20 @@ export interface Coordinate {
 	lon: number;
 }
 
+export type SortDirection = "desc" | "asc";
+export type SortBy = "name" | "category" | "description" | "address";
+
 export const allCategories = ["food", "health", "service_station", "guest_house", "hotel"] as const;
 type CategoryTuple = typeof allCategories;
 export type Category = CategoryTuple[number];
-export type SortDirection = "desc" | "asc";
-export type SortBy = "name" | "category" | "description" | "address";
+
+export const CategoryEmoji = new Map<Category, string>([
+	["food", "🍔"],
+	["guest_house", "🏠"],
+	["health", "⚕️"],
+	["hotel", "🏨"],
+	["service_station", "⛽"],
+]);
 
 // TABLE
 export interface TableColumn {
