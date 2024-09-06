@@ -4,7 +4,6 @@ import { getInitialList, paginateTableData, searchForPlace } from "../api/api";
 import { Pagination, Place, PlaceRecords, SortBy, SortDirection, TableRow } from "../types/types";
 import PlaceModal from "../components/PlaceModal";
 import "../styles/tablePlaces.scss";
-// import { mockTable } from "./mockData";
 
 const tableColumns = [
 	{
@@ -51,8 +50,6 @@ export default function TablePlaces() {
 
 		if (error) setError(`An error occurred, "${JSON.stringify(error)}", please try again.`);
 		else mapTableData(data);
-
-		// mapTableData(mockTable);
 
 		setLoading(false);
 	};
@@ -131,10 +128,10 @@ export default function TablePlaces() {
 				<button onClick={searchBtnClick} disabled={loading || !searchStr || searchStr?.trim().length <= 0}>
 					Search
 				</button>
-			</div>
 
-			{loading && <p className="loading">Loading places...</p>}
-			{error && <p className="error-message">{error}</p>}
+				{loading && <p className="loading">Loading places...</p>}
+				{error && <p className="error-message">{error}</p>}
+			</div>
 
 			<Table columns={tableColumns} rows={tableRows} pagination={paginationData} paginate={paginateTable} />
 		</div>

@@ -8,7 +8,7 @@ interface Props {
 export default function DatatableRows({ rows }: Props) {
 	const createRow = (row: TableRow, key: number) => {
 		return (
-			<tr key={key}>
+			<tr className="record-row" key={key}>
 				{row.cells.map((rowCell: TableRowCell, i: number) => {
 					return <td key={`${key}-rowCell-${i}`}>{rowCell.text.toString()}</td>;
 				})}
@@ -29,7 +29,7 @@ export default function DatatableRows({ rows }: Props) {
 	return rows && rows.length > 0 ? (
 		mapRows()
 	) : (
-		<tr>
+		<tr className="record-row">
 			<td>No records.</td>
 		</tr>
 	);

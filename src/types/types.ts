@@ -59,7 +59,6 @@ export type SortBy = "name" | "category" | "description" | "address";
 export interface TableColumn {
 	label: string;
 	field: string;
-	sortDirection?: SortDirection;
 }
 
 export interface TableRow {

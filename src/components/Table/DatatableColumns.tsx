@@ -1,12 +1,14 @@
 import React, { ReactElement } from "react";
-import { TableColumn } from "../../types/types";
+import { SortDirection, TableColumn } from "../../types/types";
 
 interface Props {
 	columns: TableColumn[];
 	sortColumn(column: TableColumn): void;
+	sortedColumn: string | undefined;
+	sortDirection: SortDirection;
 }
 
-export default function DatatableColumns({ columns, sortColumn }: Props) {
+export default function DatatableColumns({ columns, sortDirection, sortedColumn, sortColumn }: Props) {
 	const mapColumns = (): ReactElement[] => {
 		const temp: ReactElement[] = [];
 
@@ -14,11 +16,13 @@ export default function DatatableColumns({ columns, sortColumn }: Props) {
 			temp.push(
 				<th className="table-header" key={`th-${index}`}>
 					<div
+						className="col-header"
 						onClick={() => {
 							sortColumn(col);
 						}}
 					>
-						<i className={`sortable-icon ${col.sortDirection}`}></i>
+						{sortedColumn === col.field && sortDirection === "asc" && <span className="sortable-icon">&#x25b4;</span>}
+						{sortedColumn === col.field && sortDirection === "desc" && <span className="sortable-icon">&#x25be;</span>}
 						{col.label}
 					</div>
 				</th>,
@@ -32,7 +36,7 @@ export default function DatatableColumns({ columns, sortColumn }: Props) {
 		<tr>{mapColumns()}</tr>
 	) : (
 		<tr>
-			<th>Please provide column data.</th>
+			<th className="table-header">Please provide column data.</th>
 		</tr>
 	);
 }

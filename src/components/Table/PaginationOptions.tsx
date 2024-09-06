@@ -24,33 +24,32 @@ export default function PaginationOptions({ rowCount, limit, totalCount, current
 	};
 
 	return (
-		<nav aria-label="Table pagination navigation">
-			<ul className="pagination">
-				<li className="rows-per-page">
+		totalCount > 0 && (
+			<nav aria-label="Table pagination navigation">
+				<div className="pagination">
 					<label htmlFor="rowsPerPage">Rows per page</label>
-					<select value={limit} onChange={limitChange} className="rows-select">
+					<select id="rowsPerPage" value={limit} onChange={limitChange} className="rows-select">
 						<option>5</option>
 						<option>10</option>
 						<option>20</option>
 						<option>50</option>
 						<option>100</option>
 					</select>
-				</li>
-
-				<li className={currentPage - 1 > 0 ? "active previous" : "disabled previous"}>
-					<a onClick={() => goToPreviousPage(currentPage)}>
-						<span aria-label="Previous" className="fa fa-angle-left"></span>
-					</a>
-				</li>
-				<p className="current">
-					Page {currentPage} of {totalPages}
-				</p>
-				<li className={currentPage + 1 <= totalPages ? "active next" : "disabled next"}>
-					<a onClick={() => goToNextPage(currentPage)}>
-						<span aria-label="Next" className="fa fa-angle-right"></span>
-					</a>
-				</li>
-			</ul>
-		</nav>
+					{currentPage - 1 > 0 && (
+						<span aria-label="Previous" onClick={() => goToPreviousPage(currentPage)}>
+							&lsaquo;
+						</span>
+					)}
+					<p className="current">
+						Page {currentPage} of {totalPages}
+					</p>
+					{currentPage + 1 <= totalPages && (
+						<span aria-label="Next" onClick={() => goToNextPage(currentPage)}>
+							&rsaquo;
+						</span>
+					)}
+				</div>
+			</nav>
+		)
 	);
 }

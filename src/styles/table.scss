@@ -1,2 +1,45 @@
 #data-table {
+	.table-header {
+		background-color: var(--navbar-color);
+		padding: 0.5rem;
+
+		.col-header {
+			display: flex;
+
+			.sortable-icon {
+				margin-right: 0.3rem;
+			}
+		}
+
+		.col-header:hover {
+			cursor: pointer;
+		}
+	}
+
+	.record-row {
+		td {
+			padding: 0.5rem;
+		}
+	}
+
+	tfoot {
+		nav {
+			width: max-content;
+
+			.pagination {
+				display: flex;
+
+				.current {
+					margin: 0 0.5rem;
+				}
+
+				select {
+					margin: 0 1rem 0 0.5rem;
+				}
+				span:hover {
+					cursor: pointer;
+				}
+			}
+		}
+	}
 }

@@ -3,6 +3,7 @@ import { Pagination, SortDirection, TableColumn, TableRow } from "../../types/ty
 import DatatableRows from "./DatatableRows";
 import DatatableColumns from "./DatatableColumns";
 import PaginationOptions from "./PaginationOptions";
+import "../../styles/table.scss";
 
 interface Props {
 	pagination: Pagination;
@@ -13,15 +14,23 @@ interface Props {
 
 export default function Table({ pagination, columns, rows, paginate }: Props) {
 	const [sortedColumn, setSortedColumn] = useState<string>();
-	const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
+	const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
 
 	// sorting is the concern of the table component, so we keep the state stored inside
 	const sortColumn = (column: TableColumn) => {
-		const direction = !column.sortDirection ? "asc" : column.sortDirection === "asc" ? "desc" : "asc";
-		setSortDirection(direction);
-		setSortedColumn(column.field);
+		let direction: SortDirection = "asc";
+		let colField = sortedColumn;
 
-		paginate(pagination.page, pagination.limit, column.field, direction);
+		if (sortedColumn === column.field) {
+			direction = sortDirection === "desc" ? "asc" : "desc";
+			setSortDirection(direction);
+		} else {
+			colField = column.field;
+			setSortedColumn(column.field);
+			setSortDirection("asc");
+		}
+
+		paginate(pagination.page, pagination.limit, colField, direction);
 	};
 
 	const paginateAction = (pageNumber: number, limit: number) => {
@@ -31,14 +40,19 @@ export default function Table({ pagination, columns, rows, paginate }: Props) {
 	return (
 		<table id="data-table">
 			<thead>
-				<DatatableColumns columns={columns} sortColumn={sortColumn} />
+				<DatatableColumns
+					columns={columns}
+					sortColumn={sortColumn}
+					sortDirection={sortDirection}
+					sortedColumn={sortedColumn}
+				/>
 			</thead>
 			<tbody>
 				<DatatableRows rows={rows} />
 			</tbody>
 			<tfoot>
 				<tr>
-					<td>
+					<td colSpan={columns.length}>
 						<PaginationOptions
 							rowCount={rows.length}
 							limit={pagination.limit}
