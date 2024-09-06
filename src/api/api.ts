@@ -7,7 +7,7 @@ const fetchOptions: RequestInit = {
 	method: "GET",
 	mode: "cors",
 	headers: {
-		"Content-Type": "application/json",
+		"Content-Type": "text/plain",
 	},
 };
 
@@ -17,7 +17,8 @@ export async function getPlaceById(id: string): Promise<ApiResponse<Place, Error
 	const res = await fetch(`${baseUrl}/places/${id}`, fetchOptions);
 
 	if (res.ok) {
-		const data = await res.json();
+		const textData = await res.text();
+		const data = JSON.parse(textData);
 		if (isDebug) console.log("getPlaceById()", data);
 		return { data, error: undefined };
 	} else {
@@ -35,11 +36,12 @@ export async function searchForPlace(
 	sortBy?: SortBy,
 	sortDirection?: SortDirection,
 ): Promise<ApiResponse<PlaceRecords, Error>> {
-	const finalUrl = `${baseUrl}/places/search=${name}&page=${page}&limit=${limit}&category=${filter}&sortBy=${sortBy}&sortDirection=${sortDirection}`;
+	const finalUrl = `${baseUrl}/places?search=${name}&page=${page}&limit=${limit}&category=${filter}&sortBy=${sortBy}&sortDirection=${sortDirection}`;
 	const res = await fetch(finalUrl, fetchOptions);
 
 	if (res.ok) {
-		const data = await res.json();
+		const textData = await res.text();
+		const data = JSON.parse(textData);
 		if (isDebug) console.log("searchForPlace()", data);
 		return { data, error: undefined };
 	} else {
@@ -52,11 +54,12 @@ export async function searchForPlace(
 // TABLE REST CALLS
 
 export async function getInitialList(limit: number): Promise<ApiResponse<PlaceRecords, Error>> {
-	const finalUrl = `${baseUrl}/places/page=1&limit=${limit}`;
+	const finalUrl = `${baseUrl}/places?page=1&limit=${limit}`;
 	const res = await fetch(finalUrl, fetchOptions);
 
 	if (res.ok) {
-		const data = await res.json();
+		const textData = await res.text();
+		const data = JSON.parse(textData);
 		if (isDebug) console.log("getInitialList()", data);
 		return { data, error: undefined };
 	} else {
@@ -72,11 +75,12 @@ export async function paginateTableData(
 	sortBy?: SortBy,
 	sortDirection?: SortDirection,
 ): Promise<ApiResponse<PlaceRecords, Error>> {
-	const finalUrl = `${baseUrl}/places/page=${page}&limit=${limit}&sortBy=${sortBy}&sortDirection=${sortDirection}`;
+	const finalUrl = `${baseUrl}/places?page=${page}&limit=${limit}&sortBy=${sortBy}&sortDirection=${sortDirection}`;
 	const res = await fetch(finalUrl, fetchOptions);
 
 	if (res.ok) {
-		const data = await res.json();
+		const textData = await res.text();
+		const data = JSON.parse(textData);
 		if (isDebug) console.log("paginateTableData()", data);
 		return { data, error: undefined };
 	} else {
@@ -92,7 +96,7 @@ export async function pingServer(): Promise<ApiResponse<string, Error>> {
 	const res = await fetch(`${baseUrl}/ping`, fetchOptions);
 
 	if (res.ok) {
-		const data = await res.json();
+		const data = await res.text();
 		if (isDebug) console.log("testServer()", data);
 		return { data, error: undefined };
 	} else {

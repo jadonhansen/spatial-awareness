@@ -1,4 +1,4 @@
-// API RESPONSES
+// API
 export interface SuccessResponse<SuccessResponseData> {
 	data: SuccessResponseData;
 	error: undefined;
@@ -49,7 +49,9 @@ export interface Coordinate {
 	lon: number;
 }
 
-export type Category = "food" | "health" | "service_station" | "guest_house" | "hotel";
+export const allCategories = ["food", "health", "service_station", "guest_house", "hotel"] as const;
+type CategoryTuple = typeof allCategories;
+export type Category = CategoryTuple[number];
 export type SortDirection = "desc" | "asc";
 export type SortBy = "name" | "category" | "description" | "address";
 

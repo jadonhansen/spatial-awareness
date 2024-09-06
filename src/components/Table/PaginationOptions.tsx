@@ -9,9 +9,7 @@ interface Props {
 	paginate(pageNumber: number, limit: number): void;
 }
 
-// TODO remove below
 /* eslint @typescript-eslint/no-unused-vars: 0 */
-
 export default function PaginationOptions({ rowCount, limit, totalCount, currentPage, totalPages, paginate }: Props) {
 	const limitChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		paginate(1, Number(event.target.value));
