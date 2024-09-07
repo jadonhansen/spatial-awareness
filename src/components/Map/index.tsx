@@ -24,6 +24,7 @@ export default function Map({ children, places }: Props) {
 				bootstrapURLKeys={{ key: import.meta.env.VITE_GOOGLE_MAPS_API_KEY }}
 				defaultCenter={mapCenter}
 				defaultZoom={mapZoom}
+				yesIWantToUseGoogleMapApiInternals
 			>
 				{places.map((place: Place, index: number) => {
 					return <Marker key={index} lat={place.coordinates.lat} lng={place.coordinates.lon} place={place} />;

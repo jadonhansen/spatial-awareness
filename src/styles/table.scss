@@ -20,6 +20,11 @@
 		td {
 			padding: 0.5rem;
 		}
+
+		&.has-data:hover {
+			background-color: var(--table-row-hover-color);
+			cursor: pointer;
+		}
 	}
 
 	tfoot {

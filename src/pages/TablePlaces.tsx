@@ -29,6 +29,7 @@ export default function TablePlaces() {
 	// component state
 	const [error, setError] = useState<string | undefined>();
 	const [loading, setLoading] = useState(true);
+	const [currentPlaces, setCurrentPlaces] = useState<Place[]>([]);
 	const [placeModalData, setPlaceModalData] = useState<Place | undefined>();
 	// form state
 	const [searchStr, setSearchStr] = useState<string | undefined>();
@@ -56,6 +57,8 @@ export default function TablePlaces() {
 	};
 
 	const mapTableData = (data: PlaceRecords) => {
+		setCurrentPlaces(data.data);
+
 		setPaginationData({
 			limit: data.meta.limit,
 			page: data.meta.page,
@@ -67,6 +70,7 @@ export default function TablePlaces() {
 
 		rows = data.data.map((place): TableRow => {
 			return {
+				id: place.id,
 				cells: [
 					{
 						text: place.name,
@@ -119,6 +123,11 @@ export default function TablePlaces() {
 		setLoading(false);
 	};
 
+	const onRowClick = (row: TableRow) => {
+		const place = currentPlaces.filter((place) => place.id === row.id);
+		if (place) setPlaceModalData(place[0]);
+	};
+
 	return (
 		<div id="table-places-page" className="page">
 			{placeModalData && <PlaceModal place={placeModalData} closeModal={() => setPlaceModalData(undefined)} />}
@@ -135,7 +144,13 @@ export default function TablePlaces() {
 				{error && <p className="error-message">{error}</p>}
 			</div>
 
-			<Table columns={tableColumns} rows={tableRows} pagination={paginationData} paginate={paginateTable} />
+			<Table
+				columns={tableColumns}
+				rows={tableRows}
+				pagination={paginationData}
+				paginate={paginateTable}
+				rowClick={onRowClick}
+			/>
 		</div>
 	);
 }

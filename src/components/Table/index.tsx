@@ -9,10 +9,11 @@ interface Props {
 	pagination: Pagination;
 	columns: TableColumn[];
 	rows: TableRow[];
+	rowClick(row: TableRow): void;
 	paginate(pageNumber: number, limit: number, columnSort: string | undefined, sortDirection: SortDirection): Promise<void>;
 }
 
-export default function Table({ pagination, columns, rows, paginate }: Props) {
+export default function Table({ pagination, columns, rows, paginate, rowClick }: Props) {
 	const [sortedColumn, setSortedColumn] = useState<string>();
 	const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
 
@@ -48,7 +49,7 @@ export default function Table({ pagination, columns, rows, paginate }: Props) {
 				/>
 			</thead>
 			<tbody>
-				<DatatableRows rows={rows} />
+				<DatatableRows rows={rows} rowClick={rowClick} />
 			</tbody>
 			<tfoot>
 				<tr>

@@ -3,12 +3,13 @@ import { TableRow, TableRowCell } from "../../types/types";
 
 interface Props {
 	rows: TableRow[];
+	rowClick(row: TableRow): void;
 }
 
-export default function DatatableRows({ rows }: Props) {
+export default function DatatableRows({ rows, rowClick }: Props) {
 	const createRow = (row: TableRow, key: number) => {
 		return (
-			<tr className="record-row" key={key}>
+			<tr className="record-row has-data" key={key} onClick={() => rowClick(row)}>
 				{row.cells.map((rowCell: TableRowCell, i: number) => {
 					return <td key={`${key}-rowCell-${i}`}>{rowCell.text.toString()}</td>;
 				})}

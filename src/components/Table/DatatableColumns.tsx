@@ -12,9 +12,9 @@ export default function DatatableColumns({ columns, sortDirection, sortedColumn,
 	const mapColumns = (): ReactElement[] => {
 		const temp: ReactElement[] = [];
 
-		columns.forEach((col: TableColumn, index: number) => {
+		columns.forEach((col: TableColumn, key: number) => {
 			temp.push(
-				<th className="table-header" key={`th-${index}`}>
+				<th className="table-header" key={`th-${key}`}>
 					<div
 						className="col-header"
 						onClick={() => {

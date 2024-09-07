@@ -71,6 +71,7 @@ export interface TableColumn {
 }
 
 export interface TableRow {
+	id: string;
 	cells: TableRowCell[];
 }
 
