@@ -1,5 +1,6 @@
 import React from "react";
 import { Place } from "../types/types";
+import { prettyCategory } from "../helpers/helpers";
 import "../styles/placeModal.scss";
 
 interface Props {
@@ -14,7 +15,7 @@ export default function PlaceModal({ place, closeModal }: Props) {
 				<div className="header">
 					<div>
 						<h2>{place.name}</h2>
-						<p>{place.category}</p>
+						<p>{prettyCategory(place.category)}</p>
 					</div>
 					<button className="close-btn" onClick={closeModal}>
 						X

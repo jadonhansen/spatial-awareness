@@ -26,7 +26,9 @@ export default function MapPlaces() {
 		if (error) setTestError(true);
 	};
 
-	const searchBtnClick = () => {
+	const formSearch = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+
 		setError(undefined);
 		if (testError || loading || (searchStr && searchStr?.trim().length <= 0) || (!searchStr && !category)) return;
 
@@ -58,20 +60,22 @@ export default function MapPlaces() {
 					<h1>Find a Place</h1>
 
 					<div className="search-section">
-						<input type="text" placeholder="Name" value={searchStr} onChange={(e) => setSearchStr(e.target.value)} />
-						<select id="category-select" value={category} onChange={updateCategory} className="rows-select">
-							<option>{NO_CATEOGORY}</option>
-							{allCategories.map((category: Category, index: number) => {
-								return (
-									<option key={index} value={category}>
-										{prettyCategory(category)}
-									</option>
-								);
-							})}
-						</select>
-						<button onClick={searchBtnClick} disabled={testError || loading}>
-							Search
-						</button>
+						<form onSubmit={formSearch}>
+							<input type="text" placeholder="Name" value={searchStr} onChange={(e) => setSearchStr(e.target.value)} />
+							<select id="category-select" value={category} onChange={updateCategory} className="rows-select">
+								<option>{NO_CATEOGORY}</option>
+								{allCategories.map((category: Category, index: number) => {
+									return (
+										<option key={index} value={category}>
+											{prettyCategory(category)}
+										</option>
+									);
+								})}
+							</select>
+							<button type="submit" disabled={testError || loading}>
+								Search
+							</button>
+						</form>
 
 						<ColorRing
 							visible={loading}

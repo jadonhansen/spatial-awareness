@@ -111,7 +111,9 @@ export default function TablePlaces() {
 		setLoading(false);
 	};
 
-	const searchBtnClick = async () => {
+	const formSearch = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+
 		setError(undefined);
 		if (loading || !searchStr || searchStr?.trim().length <= 0) return;
 
@@ -146,10 +148,12 @@ export default function TablePlaces() {
 			<h1>Available Places</h1>
 
 			<div className="search-section">
-				<input value={searchStr} type="text" placeholder="Name" onChange={(e) => setSearchStr(e.target.value.trim())} />
-				<button onClick={searchBtnClick} disabled={loading || !searchStr || searchStr?.trim().length <= 0}>
-					Search
-				</button>
+				<form onSubmit={formSearch}>
+					<input value={searchStr} type="text" placeholder="Name" onChange={(e) => setSearchStr(e.target.value.trim())} />
+					<button type="submit" disabled={loading || !searchStr || searchStr?.trim().length <= 0}>
+						Search
+					</button>
+				</form>
 				{showClearBtn && (
 					<button id="clear-button" onClick={clearSearch}>
 						Clear
