@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { ColorRing } from "react-loader-spinner";
 import { pingServer, searchForPlace } from "../api/api";
 import { allCategories, Category, Place } from "../types/types";
 import Map from "../components/Map";
@@ -72,7 +73,17 @@ export default function MapPlaces() {
 							Search
 						</button>
 
-						{loading && <p className="loading">Loading places...</p>}
+						<ColorRing
+							visible={loading}
+							height="35"
+							colors={[
+								"rgb(140, 23, 140)",
+								"rgb(140, 23, 140)",
+								"rgb(140, 23, 140)",
+								"rgb(140, 23, 140)",
+								"rgb(140, 23, 140)",
+							]}
+						/>
 						{error && <p className="error-message">{error}</p>}
 						<div>{testError && "Server is offline at the moment."}</div>
 					</div>

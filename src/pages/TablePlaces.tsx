@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { ColorRing } from "react-loader-spinner";
 import Table from "../components/Table";
 import { getInitialList, paginateTableData, searchForPlace } from "../api/api";
 import { Pagination, Place, PlaceRecords, SortBy, SortDirection, TableRow } from "../types/types";
@@ -31,6 +32,7 @@ export default function TablePlaces() {
 	const [loading, setLoading] = useState(true);
 	const [currentPlaces, setCurrentPlaces] = useState<Place[]>([]);
 	const [placeModalData, setPlaceModalData] = useState<Place | undefined>();
+	const [showClearBtn, setShowClearBtn] = useState<boolean>(false);
 	// form state
 	const [searchStr, setSearchStr] = useState<string | undefined>();
 	// table state
@@ -120,7 +122,16 @@ export default function TablePlaces() {
 		if (error) setError(`An error occurred, "${JSON.stringify(error)}", please try again.`);
 		else mapTableData(data);
 
+		setShowClearBtn(true);
 		setLoading(false);
+	};
+
+	const clearSearch = () => {
+		setError(undefined);
+		setSearchStr("");
+		setLoading(true);
+		initialData();
+		setShowClearBtn(false);
 	};
 
 	const onRowClick = (row: TableRow) => {
@@ -135,12 +146,21 @@ export default function TablePlaces() {
 			<h1>Available Places</h1>
 
 			<div className="search-section">
-				<input type="text" placeholder="Name" onChange={(e) => setSearchStr(e.target.value.trim())} />
+				<input value={searchStr} type="text" placeholder="Name" onChange={(e) => setSearchStr(e.target.value.trim())} />
 				<button onClick={searchBtnClick} disabled={loading || !searchStr || searchStr?.trim().length <= 0}>
 					Search
 				</button>
+				{showClearBtn && (
+					<button id="clear-button" onClick={clearSearch}>
+						Clear
+					</button>
+				)}
 
-				{loading && <p className="loading">Loading places...</p>}
+				<ColorRing
+					visible={loading}
+					height="35"
+					colors={["rgb(140, 23, 140)", "rgb(140, 23, 140)", "rgb(140, 23, 140)", "rgb(140, 23, 140)", "rgb(140, 23, 140)"]}
+				/>
 				{error && <p className="error-message">{error}</p>}
 			</div>
 

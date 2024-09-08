@@ -31,6 +31,11 @@
 			color: var(--btn-text-color);
 		}
 
+		#clear-button {
+			margin-left: 0.5rem;
+			background-color: var(--secondary-btn-color);
+		}
+
 		button:hover {
 			cursor: pointer;
 		}
