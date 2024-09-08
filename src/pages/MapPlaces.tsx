@@ -14,7 +14,7 @@ export default function MapPlaces() {
 	// form state
 	const [searchStr, setSearchStr] = useState<string | undefined>();
 	const [category, setCategory] = useState<Category | undefined>();
-	const NO_CATEOGORY = "Choose category";
+	const NO_CATEOGORY = "Select a category";
 
 	useEffect(() => {
 		testServer();
@@ -28,9 +28,6 @@ export default function MapPlaces() {
 	const searchBtnClick = () => {
 		setError(undefined);
 		if (testError || loading || (searchStr && searchStr?.trim().length <= 0) || (!searchStr && !category)) return;
-
-		console.log(searchStr);
-		console.log(category);
 
 		setLoading(true);
 		search(searchStr, category);
@@ -61,7 +58,7 @@ export default function MapPlaces() {
 
 					<div className="search-section">
 						<input type="text" placeholder="Name" value={searchStr} onChange={(e) => setSearchStr(e.target.value)} />
-						<select value={category} onChange={updateCategory} className="rows-select">
+						<select id="category-select" value={category} onChange={updateCategory} className="rows-select">
 							<option>{NO_CATEOGORY}</option>
 							{allCategories.map((category: Category, index: number) => {
 								return (
@@ -74,11 +71,11 @@ export default function MapPlaces() {
 						<button onClick={searchBtnClick} disabled={testError || loading}>
 							Search
 						</button>
-					</div>
 
-					{loading && <p className="loading">Loading places...</p>}
-					{error && <p className="error-message">{error}</p>}
-					<div>{testError && "Server is offline at the moment."}</div>
+						{loading && <p className="loading">Loading places...</p>}
+						{error && <p className="error-message">{error}</p>}
+						<div>{testError && "Server is offline at the moment."}</div>
+					</div>
 				</div>
 			</Map>
 		</div>

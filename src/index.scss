@@ -2,17 +2,18 @@
 	--primary-color: rgb(140, 23, 140);
 	/* DARK MODE COLORS */
 	--bg-color: #000000;
-	--text-color: rgba(255, 255, 255, 0.87);
-	--secondary-text-color: rgba(255, 255, 255, 0.721);
+	--text-color: rgb(228, 228, 228);
+	--secondary-text-color: rgb(147, 147, 147);
 	--map-text-color: #2b2b2b;
-	--btn-text-color: rgba(255, 255, 255, 0.87);
+	--map-line-color: #343434;
+	--btn-text-color: rgb(255, 255, 255);
 	--navbar-color: #212121;
-	--navbar-text-color: rgb(211, 211, 211);
+	--navbar-text-color: rgb(228, 228, 228);
 	--navbar-text-hover-color: rgb(255, 255, 255);
-	--footer-bg-color: #000000;
-	--divider-line-color: #343434;
+	--line-color: #343434;
 	--error-text: rgb(255, 100, 100);
-	--table-row-hover-color: rgba(255, 255, 255, 0.176);
+	--table-row-hover-color: rgba(255, 255, 255, 0.11);
+	--modal-container-color: rgba(0, 0, 0, 0.56);
 
 	/* SIZES */
 	--navbar-footer-padding: 1.5rem;
@@ -51,15 +52,14 @@
 		// LIGHT MODE COLORS
 		--bg-color: #f9f9f9;
 		--text-color: #2b2b2b;
-		--secondary-text-color: #3d3d3d;
-		--map-text-color: rgba(255, 255, 255, 0.87);
-		--btn-text-color: rgba(255, 255, 255, 0.87);
+		--secondary-text-color: #777777;
+		--map-text-color: #2b2b2b;
+		--map-line-color: #343434;
 		--navbar-text-color: #1c1c1c;
-		--navbar-text-hover-color: #3b3b3b;
-		--footer-bg-color: #ffffff;
-		--divider-line-color: #cecece;
+		--navbar-text-hover-color: #525252;
+		--line-color: #cecece;
 		--navbar-color: #c184bf;
 		--error-text: rgb(255, 60, 60);
-		--table-row-hover-color: rgba(255, 255, 255, 0.817);
+		--table-row-hover-color: rgba(140, 23, 140, 0.32);
 	}
 }

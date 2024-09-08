@@ -27,8 +27,8 @@ export default function PaginationOptions({ rowCount, limit, totalCount, current
 		totalCount > 0 && (
 			<nav aria-label="Table pagination navigation">
 				<div className="pagination">
-					<label htmlFor="rowsPerPage">Rows per page</label>
-					<select id="rowsPerPage" value={limit} onChange={limitChange} className="rows-select">
+					<label htmlFor="rows-per-page">Rows per page</label>
+					<select id="rows-per-page" value={limit} onChange={limitChange} className="rows-select">
 						<option>5</option>
 						<option>10</option>
 						<option>20</option>
