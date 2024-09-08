@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Pagination, SortDirection, TableColumn, TableRow } from "../../types/types";
 import DatatableRows from "./DatatableRows";
 import DatatableColumns from "./DatatableColumns";

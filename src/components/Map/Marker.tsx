@@ -1,4 +1,3 @@
-import React from "react";
 import { CategoryEmoji, Place } from "../../types/types";
 
 interface Props {

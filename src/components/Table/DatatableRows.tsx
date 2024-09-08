@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { TableRow, TableRowCell } from "../../types/types";
 
 interface Props {

@@ -9,8 +9,6 @@ interface Props {
 	children?: React.ReactNode;
 }
 
-/* eslint @typescript-eslint/no-unused-vars: 0 */
-
 export default function Map({ children, places }: Props) {
 	const [mapZoom, setMapZoom] = useState<number>(3);
 	const [mapCenter, setMapCenter] = useState<GoogleMapReact.Coords>({
