@@ -89,7 +89,7 @@ export default function MapPlaces() {
 							]}
 						/>
 						{error && <p className="error-message">{error}</p>}
-						<div>{testError && "Server is offline at the moment."}</div>
+						{testError && <p className="error-message">Server is offline at the moment.</p>}
 					</div>
 				</div>
 			</Map>
