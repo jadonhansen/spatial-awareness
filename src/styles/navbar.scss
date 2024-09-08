@@ -25,6 +25,10 @@
 				margin-right: 0.4rem;
 			}
 
+			.theme-icon:hover {
+				cursor: pointer;
+			}
+
 			@media (prefers-color-scheme: light) {
 				.table-icon {
 					content: url("../assets/table-light.svg");
@@ -32,6 +36,10 @@
 
 				.map-icon {
 					content: url("../assets/map-light.svg");
+				}
+
+				.theme-icon {
+					content: url("../assets//moon-light.svg");
 				}
 			}
 		}
