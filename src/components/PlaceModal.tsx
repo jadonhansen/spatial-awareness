@@ -1,4 +1,3 @@
-import React from "react";
 import { Place } from "../types/types";
 import { prettyCategory } from "../helpers/helpers";
 import "../styles/placeModal.scss";
