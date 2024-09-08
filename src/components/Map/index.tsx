@@ -10,7 +10,9 @@ interface Props {
 }
 
 export default function Map({ children, places }: Props) {
+	// @ts-expect-error:next-line
 	const [mapZoom, setMapZoom] = useState<number>(3);
+	// @ts-expect-error:next-line
 	const [mapCenter, setMapCenter] = useState<GoogleMapReact.Coords>({
 		lat: 10.99835602,
 		lng: 77.01502627,
