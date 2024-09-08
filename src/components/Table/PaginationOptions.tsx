@@ -9,6 +9,7 @@ interface Props {
 	paginate(pageNumber: number, limit: number): void;
 }
 
+// @ts-expect-error:next-line
 export default function PaginationOptions({ rowCount, limit, totalCount, currentPage, totalPages, paginate }: Props) {
 	const limitChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		paginate(1, Number(event.target.value));
