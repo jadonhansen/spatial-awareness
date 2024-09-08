@@ -38,13 +38,24 @@
 
 				.pagination {
 					display: flex;
+					align-items: center;
 
 					.current {
 						margin: 0 0.5rem;
 					}
 
-					select {
+					#rowsPerPage {
 						margin: 0 1rem 0 0.5rem;
+						background: transparent;
+						border: 1px solid var(--divider-line-color);
+						border-radius: 4px;
+						padding: 0.2rem;
+					}
+
+					span,
+					label,
+					.current {
+						color: var(--secondary-text-color);
 					}
 
 					span:hover {
