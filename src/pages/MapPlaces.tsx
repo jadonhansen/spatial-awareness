@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ColorRing } from "react-loader-spinner";
-import { pingServer, searchForPlace } from "../api/api";
+import { pingServer, getPlaces } from "../api/api";
 import { allCategories, Category, Place } from "../types/types";
 import Map from "../components/Map";
 import "../styles/mapPlaces.scss";
@@ -39,7 +39,7 @@ export default function MapPlaces() {
 	};
 
 	const search = async (searchString: string | undefined, selectedCategory: Category | undefined) => {
-		const { data, error } = await searchForPlace(searchString, 1, 1000, selectedCategory);
+		const { data, error } = await getPlaces(searchString, 1, 1000, selectedCategory);
 
 		if (error) setError("An error occurred, please try again.");
 		else if (data.data.length > 0) setPlaces(data.data);

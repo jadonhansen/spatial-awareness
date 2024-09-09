@@ -3,7 +3,10 @@
 ### Requirements:
 
 The web app will need to fetch spatial data from an API and display it in two different views: a Table and a Map.
+
 It will need to be deployed with Vercel.
+
+Bonus: dark/light mode theme picker.
 
 #### Map:
 

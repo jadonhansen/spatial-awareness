@@ -23,7 +23,7 @@ export default function PlaceModal({ place, showMap, closeModal }: Props) {
 					</button>
 				</div>
 				<div className="section">
-					<div className="info-section">
+					<div className={showMap ? "info-section" : "info-section column"}>
 						<div className="col-left">
 							<p className="sub-heading">About this place</p>
 							<p>{place.description}</p>
