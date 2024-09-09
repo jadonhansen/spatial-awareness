@@ -1,6 +1,4 @@
 #table-places-page {
-	display: flex;
-	flex-direction: column;
 	padding: 2rem;
 
 	h1 {
@@ -47,6 +45,29 @@
 
 		.error-message {
 			color: var(--error-text);
+		}
+	}
+
+	.table-wrapper {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	#table-places-page {
+		padding: 1rem;
+
+		h1 {
+			margin-bottom: 1rem;
+		}
+	}
+}
+
+@media screen and (max-width: 600px) {
+	#table-places-page {
+		.table-wrapper {
+			overflow-x: auto;
 		}
 	}
 }

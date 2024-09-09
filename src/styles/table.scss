@@ -37,6 +37,12 @@
 				justify-content: space-between;
 				align-items: center;
 
+				.results-info {
+					p {
+						color: var(--secondary-text-color);
+					}
+				}
+
 				.pagination {
 					display: flex;
 					align-items: center;
@@ -64,10 +70,14 @@
 						cursor: pointer;
 					}
 				}
+			}
 
-				.results-info {
-					p {
-						color: var(--secondary-text-color);
+			@media screen and (max-width: 615px) {
+				nav {
+					flex-direction: column;
+
+					.results-info {
+						margin-bottom: 1rem;
 					}
 				}
 			}
