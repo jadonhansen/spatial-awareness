@@ -15,11 +15,11 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: "/",
-				element: <MapPlaces />,
+				element: <TablePlaces />,
 			},
 			{
-				path: "/tablePlaces",
-				element: <TablePlaces />,
+				path: "/map-places",
+				element: <MapPlaces />,
 			},
 		],
 	},

@@ -1,7 +1,6 @@
 #place-modal {
 	position: absolute;
 	inset: 0;
-	height: 100vh;
 	width: 100vw;
 	z-index: 200;
 	background-color: var(--modal-container-color);
@@ -15,6 +14,7 @@
 		background-color: var(--modal-bg-color);
 		border-radius: 10px;
 		padding: 2rem;
+		overflow: scroll;
 
 		.header {
 			display: flex;
@@ -63,10 +63,6 @@
 				.col-right {
 					padding-left: 0.5rem;
 				}
-			}
-
-			.map-section {
-				background-color: pink;
 			}
 		}
 	}

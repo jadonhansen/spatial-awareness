@@ -1,4 +1,8 @@
 #google-map {
 	height: calc(100vh - var(--navbar-height));
 	width: 100%;
+
+	.map-marker {
+		font-size: 30px;
+	}
 }

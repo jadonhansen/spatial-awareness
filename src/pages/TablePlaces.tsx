@@ -143,7 +143,7 @@ export default function TablePlaces() {
 
 	return (
 		<div id="table-places-page" className="page">
-			{placeModalData && <PlaceModal place={placeModalData} closeModal={() => setPlaceModalData(undefined)} />}
+			{placeModalData && <PlaceModal place={placeModalData} showMap closeModal={() => setPlaceModalData(undefined)} />}
 
 			<h1>Available Places</h1>
 
