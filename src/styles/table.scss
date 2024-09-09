@@ -33,8 +33,9 @@
 			padding-top: 2rem;
 
 			nav {
-				width: max-content;
-				float: right;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
 
 				.pagination {
 					display: flex;
@@ -50,6 +51,7 @@
 						border: 1px solid var(--line-color);
 						border-radius: 5px;
 						padding: 0.2rem;
+						color: var(--secondary-text-color);
 					}
 
 					span,
@@ -60,6 +62,12 @@
 
 					span:hover {
 						cursor: pointer;
+					}
+				}
+
+				.results-info {
+					p {
+						color: var(--secondary-text-color);
 					}
 				}
 			}

@@ -9,7 +9,6 @@ interface Props {
 	paginate(pageNumber: number, limit: number): void;
 }
 
-// @ts-expect-error:next-line
 export default function PaginationOptions({ rowCount, limit, totalCount, currentPage, totalPages, paginate }: Props) {
 	const limitChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		paginate(1, Number(event.target.value));
@@ -23,9 +22,20 @@ export default function PaginationOptions({ rowCount, limit, totalCount, current
 		if (currentPage + 1 <= totalPages) paginate(currentPage + 1, limit);
 	};
 
+	const getResultsInfo = () => {
+		const start = currentPage === 1 ? 1 : limit * (currentPage - 1) + 1;
+		const end = totalPages === 1 ? totalCount : start + rowCount - 1;
+
+		return `Showing results ${start} to ${end} of ${totalCount}`;
+	};
+
 	return (
 		totalCount > 0 && (
 			<nav aria-label="Table pagination navigation">
+				<div className="results-info">
+					<p>{getResultsInfo()}</p>
+				</div>
+
 				<div className="pagination">
 					<label htmlFor="rows-per-page">Rows per page</label>
 					<select id="rows-per-page" value={limit} onChange={limitChange} className="rows-select">
