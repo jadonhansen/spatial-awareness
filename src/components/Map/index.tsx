@@ -23,22 +23,21 @@ export default function Map({ children, places, markerClick }: Props) {
 			setMapZoom(13);
 			setMapCenter({ lat: places[0].coordinates.lat, lng: places[0].coordinates.lon });
 		}
-
-		// TODO: markers not updating on map
 		setMapPlaces(places);
 	}, [places]);
 	return (
 		<div id="google-map">
 			<GoogleMapReact
 				bootstrapURLKeys={{ key: import.meta.env.VITE_GOOGLE_MAPS_API_KEY }}
-				defaultCenter={mapCenter}
-				defaultZoom={mapZoom}
+				center={mapCenter}
+				zoom={mapZoom}
 				yesIWantToUseGoogleMapApiInternals
+				resetBoundsOnResize
 			>
-				{mapPlaces.map((place: Place, index: number) => {
+				{mapPlaces.map((place: Place) => {
 					return (
 						<Marker
-							key={index}
+							key={`${String(place.coordinates.lat)}-${String(place.coordinates.lon)}`}
 							markerClick={markerClick}
 							lat={place.coordinates.lat}
 							lng={place.coordinates.lon}

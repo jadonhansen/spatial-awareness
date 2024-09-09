@@ -59,7 +59,7 @@ export type Category = CategoryTuple[number];
 export const CategoryEmoji = new Map<Category, string>([
 	["food", "🍔"],
 	["guest_house", "🏠"],
-	["health", "⚕️"],
+	["health", "💪"],
 	["hotel", "🏨"],
 	["service_station", "⛽"],
 ]);

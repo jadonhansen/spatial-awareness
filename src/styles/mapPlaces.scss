@@ -26,8 +26,12 @@
 				border: 1px solid var(--map-line-color);
 				margin-right: 0.5rem;
 				padding: 5px 10px;
-				background: transparent;
-				color: var(--map-text-color);
+				background: var(--map-input-bg-color);
+				color: var(--map-input-text-color);
+			}
+
+			input::placeholder {
+				color: var(--map-input-placeholder-text-color);
 			}
 
 			#category-select {
@@ -38,7 +42,8 @@
 				border: 1px solid var(--map-line-color);
 				border-radius: 5px;
 				padding: 0.2rem;
-				color: var(--map-text-color);
+				color: var(--map-input-text-color);
+				background-color: var(--map-input-bg-color);
 			}
 
 			button {

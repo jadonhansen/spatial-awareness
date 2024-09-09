@@ -5,4 +5,8 @@
 	.map-marker {
 		font-size: 30px;
 	}
+
+	.map-marker:hover {
+		scale: 1.1;
+	}
 }

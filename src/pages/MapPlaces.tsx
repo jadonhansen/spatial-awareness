@@ -68,9 +68,9 @@ export default function MapPlaces() {
 							<input type="text" placeholder="Name" value={searchStr} onChange={(e) => setSearchStr(e.target.value)} />
 							<select id="category-select" value={category} onChange={updateCategory} className="rows-select">
 								<option>{NO_CATEOGORY}</option>
-								{allCategories.map((category: Category, index: number) => {
+								{allCategories.map((category: Category) => {
 									return (
-										<option key={index} value={category}>
+										<option key={category} value={category}>
 											{prettyCategory(category)}
 										</option>
 									);

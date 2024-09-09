@@ -7,11 +7,11 @@ interface Props {
 }
 
 export default function DatatableRows({ rows, rowClick }: Props) {
-	const createRow = (row: TableRow, key: number) => {
+	const createRow = (row: TableRow) => {
 		return (
-			<tr className="record-row has-data" key={key} onClick={() => rowClick(row)}>
+			<tr className="record-row has-data" key={row.id} onClick={() => rowClick(row)}>
 				{row.cells.map((rowCell: TableRowCell, i: number) => {
-					return <td key={`${key}-rowCell-${i}`}>{rowCell.text.toString()}</td>;
+					return <td key={`${row.id}-rowCell`}>{rowCell.text.toString()}</td>;
 				})}
 			</tr>
 		);
@@ -20,8 +20,8 @@ export default function DatatableRows({ rows, rowClick }: Props) {
 	const mapRows = (): ReactElement[] | ReactElement => {
 		const temp: ReactElement[] = [];
 
-		rows.forEach((row: TableRow, index: number) => {
-			temp.push(createRow(row, index));
+		rows.forEach((row: TableRow) => {
+			temp.push(createRow(row));
 		});
 
 		return temp;
