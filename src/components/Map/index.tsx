@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import GoogleMapReact, { fitBounds } from "google-map-react";
-import { Place } from "../../types/types";
+import GoogleMapReact, { fitBounds, MapOptions } from "google-map-react";
+import { darkModeStyles, Place, Theme } from "../../types/types";
 import Marker from "./Marker";
 import "../../styles/map.scss";
-import { getBoundsFromPlaces } from "../../helpers/helpers";
+import { getBoundsFromPlaces, getTheme } from "../../helpers/helpers";
 
 interface Props {
 	places: Place[];
@@ -15,8 +15,16 @@ export default function Map({ children, places, markerClick }: Props) {
 	const [mapPlaces, setMapPlaces] = useState<Place[]>([]);
 	const [mapZoom, setMapZoom] = useState<number | undefined>();
 	const [mapCenter, setMapCenter] = useState<GoogleMapReact.Coords | undefined>();
+	const [theme, setTheme] = useState<Theme>("dark");
+
+	const mapOptions: MapOptions = {
+		styles: darkModeStyles,
+	};
 
 	useEffect(() => {
+		const theme = getTheme();
+		setTheme(theme);
+
 		if (places.length === 1) {
 			setMapZoom(13);
 			setMapCenter({ lat: places[0].coordinates.lat, lng: places[0].coordinates.lon });
@@ -60,6 +68,7 @@ export default function Map({ children, places, markerClick }: Props) {
 				yesIWantToUseGoogleMapApiInternals
 				resetBoundsOnResize
 				onChange={onMapChange}
+				options={theme === "dark" ? mapOptions : undefined}
 			>
 				{mapPlaces.map((place: Place) => {
 					return (

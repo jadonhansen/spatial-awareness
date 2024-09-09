@@ -43,7 +43,10 @@ export default function MapPlaces() {
 
 		if (error) setError("An error occurred, please try again.");
 		else if (data.data.length > 0) setPlaces(data.data);
-		else setError("No places found!");
+		else {
+			setPlaces([]);
+			setError("No places found!");
+		}
 
 		setLoading(false);
 	};
@@ -92,9 +95,15 @@ export default function MapPlaces() {
 								"rgb(140, 23, 140)",
 							]}
 						/>
-						{error && <p className="error-message">{error}</p>}
-						{testError && <p className="error-message">Server is offline at the moment.</p>}
 					</div>
+					{error && <p className="error-message">{error}</p>}
+					{testError && <p className="error-message">Server is offline at the moment.</p>}
+					{places && places.length > 0 && (
+						<p className="info-message">
+							Showing {places.length} result{places.length == 1 ? "" : "s"}
+							{places.length > 1 && " (you may need to zoom in if markers are overlapping)"}
+						</p>
+					)}
 				</div>
 			</Map>
 		</div>

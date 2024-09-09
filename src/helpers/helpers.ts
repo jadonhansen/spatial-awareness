@@ -1,5 +1,5 @@
 import { NESWBounds } from "google-map-react";
-import { Category, Coordinate, Place } from "../types/types";
+import { Category, Coordinate, Place, Theme } from "../types/types";
 
 export const prettyCategory = (category: Category): string => {
 	const splitString = category.split("_").map((subStr: string) => {
@@ -7,6 +7,28 @@ export const prettyCategory = (category: Category): string => {
 	});
 
 	return splitString.join().replace(",", " ");
+};
+
+// gets app theme. Prioritises theme from local storage
+export const getTheme = (): Theme => {
+	const theme = localStorage.getItem("theme");
+
+	if (theme) {
+		if (theme === "dark") return "dark";
+		if (theme === "light") return "light";
+	} else {
+		const prefersDarkTheme = window.matchMedia("(prefers-color-scheme: dark)");
+		if (prefersDarkTheme.matches) {
+			return "dark";
+		}
+
+		const prefersLightTheme = window.matchMedia("(prefers-color-scheme: light)");
+		if (prefersLightTheme.matches) {
+			return "light";
+		}
+	}
+
+	return "dark";
 };
 
 export const getBoundsFromPlaces = (places: Place[]): NESWBounds => {

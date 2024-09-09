@@ -59,14 +59,24 @@
 				cursor: pointer;
 			}
 
-			.loading,
-			.error-message {
+			.loading {
 				margin-left: 2rem;
 			}
+		}
 
-			.error-message {
-				color: var(--error-text);
-			}
+		.error-message,
+		.info-message {
+			margin: 1rem 0 0 0;
+			padding: 0;
+			font-weight: 500;
+		}
+
+		.error-message {
+			color: var(--error-text);
+		}
+
+		.info-message {
+			color: var(--map-text-color);
 		}
 	}
 }
