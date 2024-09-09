@@ -28,7 +28,7 @@ export async function getPlaceById(id: string): Promise<ApiResponse<Place, Error
 	}
 }
 
-export async function searchForPlace(
+export async function getPlaces(
 	name: string | undefined,
 	page: number,
 	limit: number,
@@ -69,27 +69,6 @@ export async function getInitialList(limit: number): Promise<ApiResponse<PlaceRe
 		return { data, error: undefined };
 	} else {
 		if (isDebug) console.error("getInitialList() error", res);
-		const error = new Error(res.statusText);
-		return { data: undefined, error };
-	}
-}
-
-export async function paginateTableData(
-	page: number,
-	limit: number,
-	sortBy?: SortBy,
-	sortDirection?: SortDirection,
-): Promise<ApiResponse<PlaceRecords, Error>> {
-	const finalUrl = `${baseUrl}/places?page=${page}&limit=${limit}&sortBy=${sortBy}&sortDirection=${sortDirection}`;
-	const res = await fetch(finalUrl, fetchOptions);
-
-	if (res.ok) {
-		const textData = await res.text();
-		const data = JSON.parse(textData);
-		if (isDebug) console.log("paginateTableData()", data);
-		return { data, error: undefined };
-	} else {
-		if (isDebug) console.error("paginateTableData() error", res);
 		const error = new Error(res.statusText);
 		return { data: undefined, error };
 	}

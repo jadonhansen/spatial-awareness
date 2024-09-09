@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ColorRing } from "react-loader-spinner";
 import Table from "../components/Table";
-import { getInitialList, paginateTableData, searchForPlace } from "../api/api";
+import { getInitialList, getPlaces } from "../api/api";
 import { Pagination, Place, PlaceRecords, SortBy, SortDirection, TableRow } from "../types/types";
 import PlaceModal from "../components/PlaceModal";
 import { prettyCategory } from "../helpers/helpers";
@@ -103,7 +103,14 @@ export default function TablePlaces() {
 		setError(undefined);
 		setLoading(true);
 
-		const { data, error } = await paginateTableData(pageNumber, limit, columnSort, sortDirection);
+		const { data, error } = await getPlaces(
+			!searchStr || searchStr?.trim() === "" ? undefined : searchStr?.trim(),
+			pageNumber,
+			limit,
+			undefined,
+			columnSort,
+			sortDirection,
+		);
 
 		if (error) setError(`An error occurred, "${JSON.stringify(error)}", please try again.`);
 		else mapTableData(data);
@@ -119,7 +126,7 @@ export default function TablePlaces() {
 
 		setLoading(true);
 
-		const { data, error } = await searchForPlace(searchStr, 1, defaultLimit);
+		const { data, error } = await getPlaces(searchStr, 1, defaultLimit);
 
 		if (error) setError(`An error occurred, "${JSON.stringify(error)}", please try again.`);
 		else mapTableData(data);

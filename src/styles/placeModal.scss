@@ -46,6 +46,7 @@
 			.info-section {
 				display: flex;
 				margin-bottom: 2rem;
+
 				.col-left,
 				.col-right {
 					width: 50%;
@@ -62,6 +63,20 @@
 				}
 				.col-right {
 					padding-left: 0.5rem;
+				}
+
+				// for map marker modal
+				&.column {
+					flex-direction: column;
+
+					.col-left,
+					.col-right {
+						padding: 0;
+					}
+
+					.col-left {
+						margin-bottom: 2rem;
+					}
 				}
 			}
 		}
