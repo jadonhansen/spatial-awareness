@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import GoogleMapReact, { fitBounds, MapOptions, Maps } from "google-map-react";
+import GoogleMapReact, { fitBounds, MapOptions } from "google-map-react";
 import { darkModeStyles, Place, Theme } from "../../types/types";
 import Marker from "./Marker";
 import "../../styles/map.scss";
