@@ -80,3 +80,27 @@
 		}
 	}
 }
+
+@media screen and (max-width: 500px) {
+	#map-places-page {
+		.map-places-content {
+			position: absolute;
+			top: 1rem;
+			left: 1rem;
+
+			h1 {
+				margin-bottom: 1rem;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 411px) {
+	.search-section {
+		flex-direction: column;
+
+		button {
+			margin-top: 1rem;
+		}
+	}
+}

@@ -175,13 +175,15 @@ export default function TablePlaces() {
 				{error && <p className="error-message">{error}</p>}
 			</div>
 
-			<Table
-				columns={tableColumns}
-				rows={tableRows}
-				pagination={paginationData}
-				paginate={paginateTable}
-				rowClick={onRowClick}
-			/>
+			<div className="table-wrapper">
+				<Table
+					columns={tableColumns}
+					rows={tableRows}
+					pagination={paginationData}
+					paginate={paginateTable}
+					rowClick={onRowClick}
+				/>
+			</div>
 		</div>
 	);
 }
