@@ -5,6 +5,7 @@ import { allCategories, Category, Place } from "../types/types";
 import Map from "../components/Map";
 import "../styles/mapPlaces.scss";
 import { prettyCategory } from "../helpers/helpers";
+import PlaceModal from "../components/PlaceModal";
 
 export default function MapPlaces() {
 	// component state
@@ -12,6 +13,7 @@ export default function MapPlaces() {
 	const [error, setError] = useState<string | undefined>();
 	const [loading, setLoading] = useState(false);
 	const [places, setPlaces] = useState<Place[]>([]);
+	const [placeModalData, setPlaceModalData] = useState<Place | undefined>();
 	// form state
 	const [searchStr, setSearchStr] = useState<string | undefined>();
 	const [category, setCategory] = useState<Category | undefined>();
@@ -55,7 +57,9 @@ export default function MapPlaces() {
 
 	return (
 		<div id="map-places-page">
-			<Map places={places}>
+			{placeModalData && <PlaceModal place={placeModalData} closeModal={() => setPlaceModalData(undefined)} />}
+
+			<Map places={places} markerClick={(place) => setPlaceModalData(place)}>
 				<div className="map-places-content">
 					<h1>Find a Place</h1>
 

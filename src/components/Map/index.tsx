@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
 import { Place } from "../../types/types";
 import Marker from "./Marker";
@@ -6,18 +6,27 @@ import "../../styles/map.scss";
 
 interface Props {
 	places: Place[];
+	markerClick?(place: Place): void;
 	children?: React.ReactNode;
 }
 
-export default function Map({ children, places }: Props) {
-	// @ts-expect-error:next-line
+export default function Map({ children, places, markerClick }: Props) {
+	const [mapPlaces, setMapPlaces] = useState<Place[]>([]);
 	const [mapZoom, setMapZoom] = useState<number>(3);
-	// @ts-expect-error:next-line
 	const [mapCenter, setMapCenter] = useState<GoogleMapReact.Coords>({
 		lat: 10.99835602,
 		lng: 77.01502627,
 	});
 
+	useEffect(() => {
+		if (places.length === 1) {
+			setMapZoom(13);
+			setMapCenter({ lat: places[0].coordinates.lat, lng: places[0].coordinates.lon });
+		}
+
+		// TODO: markers not updating on map
+		setMapPlaces(places);
+	}, [places]);
 	return (
 		<div id="google-map">
 			<GoogleMapReact
@@ -26,8 +35,16 @@ export default function Map({ children, places }: Props) {
 				defaultZoom={mapZoom}
 				yesIWantToUseGoogleMapApiInternals
 			>
-				{places.map((place: Place, index: number) => {
-					return <Marker key={index} lat={place.coordinates.lat} lng={place.coordinates.lon} place={place} />;
+				{mapPlaces.map((place: Place, index: number) => {
+					return (
+						<Marker
+							key={index}
+							markerClick={markerClick}
+							lat={place.coordinates.lat}
+							lng={place.coordinates.lon}
+							place={place}
+						/>
+					);
 				})}
 			</GoogleMapReact>
 			{children && <div>{children}</div>}

@@ -1,13 +1,15 @@
 import { Place } from "../types/types";
 import { prettyCategory } from "../helpers/helpers";
 import "../styles/placeModal.scss";
+import Map from "./Map";
 
 interface Props {
 	place: Place;
+	showMap?: boolean;
 	closeModal(): void;
 }
 
-export default function PlaceModal({ place, closeModal }: Props) {
+export default function PlaceModal({ place, showMap, closeModal }: Props) {
 	return (
 		<div id="place-modal">
 			<div className="modal-content">
@@ -31,9 +33,11 @@ export default function PlaceModal({ place, closeModal }: Props) {
 							<p>{place.address}</p>
 						</div>
 					</div>
-					<div className="map-section">
-						<p>Map</p>
-					</div>
+					{showMap && (
+						<div className="map-section">
+							<Map places={[place]} />
+						</div>
+					)}
 				</div>
 			</div>
 		</div>

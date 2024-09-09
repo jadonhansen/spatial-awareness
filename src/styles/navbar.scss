@@ -25,14 +25,8 @@
 				margin-right: 0.4rem;
 			}
 
-			@media (prefers-color-scheme: light) {
-				.table-icon {
-					content: url("../assets/table-light.svg");
-				}
-
-				.map-icon {
-					content: url("../assets/map-light.svg");
-				}
+			.theme-icon:hover {
+				cursor: pointer;
 			}
 		}
 
@@ -43,5 +37,19 @@
 		.mr {
 			margin-right: 1.5rem;
 		}
+	}
+}
+
+:root[theme="light"] {
+	.table-icon {
+		content: url("../assets/table-light.svg");
+	}
+
+	.map-icon {
+		content: url("../assets/map-light.svg");
+	}
+
+	.theme-icon {
+		content: url("../assets//moon-dark.svg");
 	}
 }

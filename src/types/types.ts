@@ -86,3 +86,6 @@ export interface Pagination {
 	totalPages: number;
 	totalItems: number;
 }
+
+// APP
+export type Theme = "light" | "dark";
